@@ -1,0 +1,272 @@
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$gray: rgb(128, 128, 128);
+
+html {
+  height: 100%;
+}
+
+body{
+  // https://stackoverflow.com/questions/19725150/how-to-combine-two-css3-gradients 
+  background: 
+    linear-gradient(to right, rgba(245, 102, 255, 0.4) 0%, rgba(187, 85, 255, 0.4) 50%,
+  rgba(43, 160, 255, 0.4) 100%), 
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.65) 0%, rgba(39, 39, 39, 0.75) 50%, 
+  rgba(0, 0, 0, 1) 100%);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+} 
+
+li {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+} 
+
+li a {
+  text-decoration: none;
+  color: $white;
+}
+
+li a:hover {
+  color: rgb(0, 162, 255);
+}
+
+.active {
+  color: rgb(210, 34, 216);
+  text-decoration: underline;
+}
+
+#logo {
+  display: flex;
+  justify-content: center;
+  height: 50px;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 20px;
+  display: flex;
+	align-items: center;
+  justify-content: space-between;
+  .sitename {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    color: $white;
+  }
+  .header-nav ul li {
+    padding: 0 0 0 40px;
+  }
+}
+
+.create-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 70px;
+  .create{
+    background-color:rgba(255, 255, 255, 0.60);
+    color: $white;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    button {
+      border: none;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0);
+      padding: 6px;
+      margin: 6px 6px 0 6px;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 2px 2px rgba(100, 100, 100, 0.4);
+      transition: all .2s ease-in-out;
+    }
+  }
+}
+
+.edit-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 70px;
+  .editor{
+    background-color: rgba(255, 255, 255, 0.60);
+    color: $white;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    button {
+      border: none;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0);
+      padding: 6px;
+      margin: 6px 6px 0 6px;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 2px 2px rgba(100, 100, 100, 0.4);
+      transition: all .2s ease-in-out;
+    }
+    .input {
+      margin-bottom: 10px;
+      margin-top: 0px;
+      .justified-left{
+        text-align: left;
+      }
+    }
+  }
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 20px 20px;
+  .welcome{
+    margin: 60px 0;
+    font-size: 20px;
+  }
+  .tiles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 0;
+    .tile {
+      display: flex;
+      justify-content: space-between;
+      //align-items: center;
+      flex-direction: column;
+      //background-color: rgba(0, 0, 0, 0.75);
+      //
+      height: 320px;
+      width: 240px;
+      margin: 0 10px 50px 20px;
+      //border-radius: 5px;
+      //overflow: scroll;
+      padding:0;
+      img{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        height:240px;
+        margin: 0;
+        padding:0;
+      }
+      .info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding:14px 10px;
+        background-color: rgba(0, 0, 0, 0.65);
+        .title{
+          text-decoration: none;
+          font-size: 28px;
+          color: rgb(129, 209, 255);
+        }
+        a.title:hover{
+          color: rgb(210, 34, 216);
+        }
+        .tags-all{
+          padding-top: 2px;
+          font-size: 14px;
+          color: $white;
+        }
+      }
+    }
+  } 
+}
+
+.detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px;
+  .detail {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: rgba(255, 255, 255, 0.60);
+    color: $white;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    #cover {
+      height: 300px;
+    }
+    .left{
+      .tags {
+        background-color: rgba(43, 160, 255, 0.4);
+        border-radius: 50px;
+        width: auto;
+        align-items: center;
+        color: $black;
+        margin-top: 20px;
+      }
+    }
+    .right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 10px;
+      padding-left: 40px;
+      width: 300px;
+      .title {
+        padding-bottom: 20px;
+        font-size: 36px;
+        color: $gray;
+      }
+      .buttons {
+        button {
+          border: none;
+          outline: none;
+          background-color: rgba(255, 255, 255, 0);
+          padding: 6px;
+          margin: 6px;
+        }
+        button:hover {
+          transform: scale(1.1);
+          box-shadow: 0 2px 2px rgba(100, 100, 100, 0.4);
+          transition: all .2s ease-in-out;
+        }
+      }
+    }
+  }
+}
+.input Input {
+  padding: 10px;
+  margin: 5px 0;
+  width: 300px;
+}
+
+.input TextArea {
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
+  margin: 5px 0;
+  width: 300px;
+  height: 100px;
+}
+
+
+
+
