@@ -13,8 +13,8 @@ const Nav = (props) => {
       </div>
       <nav className="header-nav">
         <ul>
-          <li><NavLink exact to="/">All Recs</NavLink></li>
-          <li><NavLink to="/posts/new">Share your favorite album!</NavLink></li>
+          <li><NavLink exact to="/"><i className="fas fa-th" /> &nbsp; All Recs</NavLink></li>
+          <li><NavLink to="/posts/new"><i className="fas fa-plus" /> &nbsp; Share your favorite album!</NavLink></li>
         </ul>
       </nav>
     </div>

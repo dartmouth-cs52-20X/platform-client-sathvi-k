@@ -7,9 +7,9 @@ html {
 }
 
 body{
-  // https://stackoverflow.com/questions/19725150/how-to-combine-two-css3-gradients 
+  // used this for background: https://stackoverflow.com/questions/19725150/how-to-combine-two-css3-gradients 
   background: 
-    linear-gradient(to right, rgba(245, 102, 255, 0.4) 0%, rgba(187, 85, 255, 0.4) 50%,
+    linear-gradient(to right, rgba(245, 102, 255, 0.4) 0%, rgba(144, 85, 255, 0.4) 50%,
   rgba(43, 160, 255, 0.4) 100%), 
     linear-gradient(to bottom, rgba(128, 128, 128, 0.65) 0%, rgba(39, 39, 39, 0.75) 50%, 
   rgba(0, 0, 0, 1) 100%);
@@ -71,6 +71,9 @@ li a:hover {
   .header-nav ul li {
     padding: 0 0 0 40px;
   }
+  a {
+    text-decoration: none;
+  }
 }
 
 .create-container {
@@ -84,12 +87,24 @@ li a:hover {
     border-radius: 10px;
     padding: 40px;
     text-align: center;
+    .error {
+      color: rgb(210, 34, 216);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .img-error {
+      color: rgb(210, 34, 216);
+      font-size: 22px;
+      font-weight: 700;
+    }
     button {
       border: none;
       outline: none;
       background-color: rgba(255, 255, 255, 0);
       padding: 6px;
-      margin: 6px 6px 0 6px;
+      margin: 8px 6px -6px 6px;
+      font-size: 20px;
     }
     button:hover {
       transform: scale(1.1);
@@ -110,6 +125,17 @@ li a:hover {
     border-radius: 10px;
     padding: 40px;
     text-align: center;
+    .error {
+      color: rgb(210, 34, 216);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .img-error {
+      color: rgb(210, 34, 216);
+      font-size: 22px;
+      font-weight: 700;
+    }
     button {
       border: none;
       outline: none;
@@ -151,15 +177,10 @@ li a:hover {
     .tile {
       display: flex;
       justify-content: space-between;
-      //align-items: center;
       flex-direction: column;
-      //background-color: rgba(0, 0, 0, 0.75);
-      //
       height: 320px;
       width: 240px;
       margin: 0 10px 50px 20px;
-      //border-radius: 5px;
-      //overflow: scroll;
       padding:0;
       img{
         display: flex;
@@ -176,11 +197,11 @@ li a:hover {
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding:14px 10px;
+        padding:15px 10px;
         background-color: rgba(0, 0, 0, 0.65);
         .title{
           text-decoration: none;
-          font-size: 28px;
+          font-size: 26px;
           color: rgb(129, 209, 255);
         }
         a.title:hover{
@@ -255,8 +276,15 @@ li a:hover {
 }
 .input Input {
   padding: 10px;
+  font-family: 'Lato', sans-serif;
   margin: 5px 0;
   width: 300px;
+  border: 2px solid rgb(34, 158, 216);
+  border-radius: 5px;
+}
+
+.input Input:focus {
+  outline-color: rgb(210, 34, 216);
 }
 
 .input TextArea {
@@ -265,8 +293,36 @@ li a:hover {
   margin: 5px 0;
   width: 300px;
   height: 100px;
+  border: 2px solid rgb(34, 158, 216);
+  border-radius: 5px;
 }
 
+.input TextArea:focus {
+  outline-color: rgb(210, 34, 216);
+}
 
-
-
+#fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  #post-error{
+    text-align: center;
+    margin: 60px;
+    font-weight: 600;
+    font-size: 32px;
+  }
+  img{
+    margin-bottom: 60px;
+  }
+  a {
+    text-decoration: none;
+    font-size: 20px;
+    color:$black;
+  }
+  a:hover{
+    color: rgb(210, 34, 216);
+    text-decoration: underline;
+  }
+}
