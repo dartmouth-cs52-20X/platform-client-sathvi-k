@@ -12,14 +12,26 @@ Figuring out Redux took a looonnnggg time, because I was still a bit confused af
 I made my platform a music recommendation/sharing site (hey look, it's wannabe-Spotify) instead of a blog site and I included input validation (you must enter a valid image URL and fill out all the fields) on the create new post and edit post forms. I also began to attempt the axios error handling, but I didn't finish. Also included a fallback page which you see if you enter a bad url path and sanitized all markdown content, don't know if these are really extra credit though :P
 
 ## Screenshots
-![All Posts page](https://github.com/dartmouth-cs52-20X/reactnotes-sathvi-k/blob/master/allposts.png)
+All Posts:
 
-![Show single post](https://github.com/dartmouth-cs52-20X/reactnotes-sathvi-k/blob/master/postview.png)
+![All Posts page](https://github.com/dartmouth-cs52-20X/platform-client-sathvi-k/blob/master/allposts.png)
 
-![Add a recommendation](https://github.com/dartmouth-cs52-20X/reactnotes-sathvi-k/blob/master/addrec.png)
+Single Post:
 
-![Bad URL/Fallback page](https://github.com/dartmouth-cs52-20X/reactnotes-sathvi-k/blob/master/badurl.png)
+![Show single post](https://github.com/dartmouth-cs52-20X/platform-client-sathvi-k/blob/master/postview.png)
 
-![Empty fields error](https://github.com/dartmouth-cs52-20X/reactnotes-sathvi-k/blob/master/emptyfields.png)
+Add a recommendation: 
 
-![Invalid image url](https://github.com/dartmouth-cs52-20X/reactnotes-sathvi-k/blob/master/invalidURL.png)
+![Add a recommendation](https://github.com/dartmouth-cs52-20X/platform-client-sathvi-k/blob/master/addrec.png)
+
+Bad URL/Fallback page:
+
+![Bad URL/Fallback page](https://github.com/dartmouth-cs52-20X/platform-client-sathvi-k/blob/master/badurl.png)
+
+Empty fields error (input validation): 
+
+![Empty fields error](https://github.com/dartmouth-cs52-20X/platform-client-sathvi-k/blob/master/emptyfields.png)
+
+Invalid image URL (input validation):
+
+![Invalid image url](https://github.com/dartmouth-cs52-20X/platform-client-sathvi-k/blob/master/invalidURL.png)
