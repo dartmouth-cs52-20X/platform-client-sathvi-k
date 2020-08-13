@@ -1,6 +1,9 @@
 $white: rgb(255, 255, 255);
 $black: rgb(0, 0, 0);
 $gray: rgb(128, 128, 128);
+$paleblue: rgb(129, 209, 255);
+$brightblue: rgb(34, 158, 216);
+$pink: rgb(210, 34, 216);
 
 html {
   height: 100%;
@@ -42,11 +45,11 @@ li a {
 }
 
 li a:hover {
-  color: rgb(0, 162, 255);
+  color: $brightblue;
 }
 
 .active {
-  color: rgb(210, 34, 216);
+  color: $pink;
   text-decoration: underline;
 }
 
@@ -76,6 +79,7 @@ li a:hover {
   }
 }
 
+// New post view
 .create-container {
   display: flex;
   justify-content: center;
@@ -88,13 +92,13 @@ li a:hover {
     padding: 40px;
     text-align: center;
     .error {
-      color: rgb(210, 34, 216);
+      color: $pink;
       font-size: 28px;
       font-weight: 700;
       margin-bottom: 10px;
     }
     .img-error {
-      color: rgb(210, 34, 216);
+      color: $pink;
       font-size: 22px;
       font-weight: 700;
     }
@@ -114,6 +118,7 @@ li a:hover {
   }
 }
 
+// Editing view
 .edit-container {
   display: flex;
   justify-content: center;
@@ -126,13 +131,13 @@ li a:hover {
     padding: 40px;
     text-align: center;
     .error {
-      color: rgb(210, 34, 216);
+      color: $pink;
       font-size: 28px;
       font-weight: 700;
       margin-bottom: 10px;
     }
     .img-error {
-      color: rgb(210, 34, 216);
+      color: $pink;
       font-size: 22px;
       font-weight: 700;
     }
@@ -158,15 +163,20 @@ li a:hover {
   }
 }
 
+// All posts view
 .home {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   padding: 0 20px 20px 20px;
+  .input Input {
+    margin-bottom: 30px;
+  }
   .welcome{
-    margin: 60px 0;
+    margin: 40px 0;
     font-size: 20px;
+    text-align: center;
   }
   .tiles {
     display: flex;
@@ -176,11 +186,10 @@ li a:hover {
     padding: 0;
     .tile {
       display: flex;
-      justify-content: space-between;
       flex-direction: column;
-      height: 320px;
+      height: auto;
       width: 240px;
-      margin: 0 10px 50px 20px;
+      margin: 20px;
       padding:0;
       img{
         display: flex;
@@ -188,6 +197,7 @@ li a:hover {
         align-items: center;
         flex-direction: column;
         height:240px;
+        width: 240px;
         margin: 0;
         padding:0;
       }
@@ -197,7 +207,7 @@ li a:hover {
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding:15px 10px;
+        padding: 15px 10px;
         background-color: rgba(0, 0, 0, 0.65);
         .title{
           text-decoration: none;
@@ -205,18 +215,20 @@ li a:hover {
           color: rgb(129, 209, 255);
         }
         a.title:hover{
-          color: rgb(210, 34, 216);
+          color: $pink;
+          transform: scale(1.15);
+          transition: all .2s ease-in-out;
         }
-        .tags-all{
-          padding-top: 2px;
-          font-size: 14px;
+        .artist {
           color: $white;
+          margin: 4px;
         }
       }
     }
   } 
 }
 
+// Single post view
 .detail-container {
   display: flex;
   justify-content: center;
@@ -253,8 +265,12 @@ li a:hover {
       padding-left: 40px;
       width: 300px;
       .title {
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         font-size: 36px;
+        color: $gray;
+      }
+      .artist {
+        font-size: 26px;
         color: $gray;
       }
       .buttons {
@@ -279,12 +295,12 @@ li a:hover {
   font-family: 'Lato', sans-serif;
   margin: 5px 0;
   width: 300px;
-  border: 2px solid rgb(34, 158, 216);
+  border: 2px solid $brightblue;
   border-radius: 5px;
 }
 
 .input Input:focus {
-  outline-color: rgb(210, 34, 216);
+  outline-color: $pink;
 }
 
 .input TextArea {
@@ -293,12 +309,12 @@ li a:hover {
   margin: 5px 0;
   width: 300px;
   height: 100px;
-  border: 2px solid rgb(34, 158, 216);
+  border: 2px solid $brightblue;
   border-radius: 5px;
 }
 
 .input TextArea:focus {
-  outline-color: rgb(210, 34, 216);
+  outline-color: $pink;
 }
 
 #fallback {
@@ -322,7 +338,24 @@ li a:hover {
     color:$black;
   }
   a:hover{
-    color: rgb(210, 34, 216);
+    color: $pink;
     text-decoration: underline;
   }
+}
+
+.tag {
+  background-color: $paleblue;
+  margin: 2px 4px;
+  border-radius: 15px;
+  padding: 0 6px 2px 6px;
+  text-align: center;
+  color: $black
+}
+
+.alltags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 4px 0 2px 0;
 }

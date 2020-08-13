@@ -4,6 +4,7 @@ import { Input, Form, TextArea } from 'semantic-ui-react';
 import { sanitize } from 'dompurify';
 import marked from 'marked';
 import { fetchPost, deletePost, updatePost } from '../actions/index';
+import TagLabel from './taglabels';
 
 class Post extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Post extends Component {
       tags: '',
       content: '',
       coverUrl: '',
+      artist: '',
       editing: false,
       errorMessage: '',
       imageError: '',
@@ -22,6 +24,7 @@ class Post extends Component {
     this.onTagsInput = this.onTagsInput.bind(this);
     this.onContentInput = this.onContentInput.bind(this);
     this.onCoverUrlInput = this.onCoverUrlInput.bind(this);
+    this.onArtistInput = this.onArtistInput.bind(this);
     this.editPost = this.editPost.bind(this);
     this.updatePost = this.updatePost.bind(this);
     this.deletePost = this.deletePost.bind(this);
@@ -37,7 +40,7 @@ class Post extends Component {
   }
 
   onTagsInput = (event) => {
-    this.setState({ tags: event.target.value });
+    this.setState({ tags: event.target.value.split(' ') });
   }
 
   onContentInput = (event) => {
@@ -48,12 +51,17 @@ class Post extends Component {
     this.setState({ coverUrl: event.target.value });
   }
 
+  onArtistInput = (event) => {
+    this.setState({ artist: event.target.value });
+  }
+
   editPost = () => {
     this.setState({
       title: this.props.currentPost.title,
       tags: this.props.currentPost.tags,
       content: this.props.currentPost.content,
       coverUrl: this.props.currentPost.coverUrl,
+      artist: this.props.currentPost.artist,
       editing: true,
     });
   }
@@ -67,17 +75,20 @@ class Post extends Component {
     const tagsLen = this.state.tags.length;
     const contentLen = this.state.content.length;
     const coverUrlLen = this.state.coverUrl.length;
+    const artistLen = this.state.artist.length;
 
-    if (titleLen > 0 && tagsLen > 0 && contentLen > 0 && coverUrlLen > 0) {
+    if (titleLen > 0 && tagsLen > 0 && contentLen > 0 && coverUrlLen > 0 && artistLen > 0) {
       const imgUrl = this.state.coverUrl;
       if (imgUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) { // everything is valid
         this.setState({ errorMessage: '' });
         this.setState({ imageError: '' });
+        console.log(this.state.tags.join(' '));
         const postInfo = {
           title: this.state.title,
-          tags: this.state.tags,
+          tags: this.state.tags.join(' ').trim(),
           content: this.state.content,
           coverUrl: this.state.coverUrl,
+          artist: this.state.artist,
         };
         this.props.updatePost(this.props.match.params.postID, postInfo);
         this.setState({
@@ -85,6 +96,7 @@ class Post extends Component {
           tags: '',
           content: '',
           coverUrl: '',
+          artist: '',
           editing: false,
         });
         this.props.fetchPost(this.props.match.params.postID);
@@ -102,6 +114,9 @@ class Post extends Component {
   }
 
   render() {
+    if (!this.props.currentPost.tags) {
+      return null;
+    }
     if (this.state.editing) {
       return (
         <div className="edit-container">
@@ -110,11 +125,13 @@ class Post extends Component {
             <div className="input">
               <div className="justified-left">Album Title</div>
               <Input placeholder="Album Title" onChange={this.onTitleInput} value={this.state.title} />
+              <div className="justified-left">Album Artist</div>
+              <Input placeholder="Album Artist" onChange={this.onArtistInput} value={this.state.artist} />
               <div className="img-error">{this.state.imageError}</div>
               <div className="justified-left">Album Artwork</div>
               <Input placeholder="URL to Album Artwork" onChange={this.onCoverUrlInput} value={this.state.coverUrl} />
               <div className="justified-left">Tags</div>
-              <Input placeholder="Tags" onChange={this.onTagsInput} value={this.state.tags} />
+              <Input placeholder="Tags" onChange={this.onTagsInput} value={this.state.tags.join(' ')} />
               <div className="justified-left">Your thoughts</div>
               <Form>
                 <TextArea placeholder="Why do you like this album?" onChange={this.onContentInput} value={this.state.content} />
@@ -130,10 +147,11 @@ class Post extends Component {
           <div className="detail">
             <div className="left">
               <img id="cover" src={this.props.currentPost.coverUrl} alt="cover-url" />
-              <div className="tags">{this.props.currentPost.tags}</div>
+              <div className="alltags"><TagLabel tags={this.props.currentPost.tags} /></div>
             </div>
             <div className="right">
               <div className="title">{this.props.currentPost.title}</div>
+              <div className="artist">By {this.props.currentPost.artist}</div>
               {/* learned how to sanitize here https://stackoverflow.com/questions/29044518/safe-alternative-to-dangerouslysetinnerhtml */}
               {/* eslint-disable-next-line react/no-danger */}
               <div dangerouslySetInnerHTML={{ __html: marked(sanitize(this.props.currentPost.content || '')) }} />

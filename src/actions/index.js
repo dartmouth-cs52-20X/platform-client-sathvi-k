@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const ROOT_URL = 'https://sathvi-lab5-platform.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://platform.cs52.me/api';
 // const API_KEY = '?key=skorandla';
 
@@ -9,6 +10,7 @@ export const ActionTypes = {
   FETCH_POST: 'FETCH_POST',
   ERROR_SET: 'ERROR_SET',
   ERROR_CLEAR: 'ERROR_CLEAR',
+  // SEARCH_FILTER: 'SEARCH',
 };
 
 export function fetchPosts() {
@@ -75,3 +77,14 @@ export function clearErrors() {
     dispatch({ type: ActionTypes.ERROR_CLEAR, payload: '' });
   };
 }
+/* export function search(request) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/search/${request}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.SEARCH, payload: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, error });
+      });
+  };
+} */

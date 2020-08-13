@@ -11,6 +11,7 @@ class NewPost extends Component {
       tags: '',
       content: '',
       coverUrl: '',
+      artist: '',
       errorMessage: '',
       imageError: '',
     };
@@ -18,6 +19,7 @@ class NewPost extends Component {
     this.onTagsInput = this.onTagsInput.bind(this);
     this.onContentInput = this.onContentInput.bind(this);
     this.onCoverUrlInput = this.onCoverUrlInput.bind(this);
+    this.onArtistInput = this.onArtistInput.bind(this);
     this.onCreateNewPost = this.onCreateNewPost.bind(this);
   }
 
@@ -37,22 +39,28 @@ class NewPost extends Component {
     this.setState({ coverUrl: event.target.value });
   }
 
+  onArtistInput = (event) => {
+    this.setState({ artist: event.target.value });
+  }
+
   onCreateNewPost = () => {
     const titleLen = this.state.title.length;
     const tagsLen = this.state.tags.length;
     const contentLen = this.state.content.length;
     const coverUrlLen = this.state.coverUrl.length;
+    const artistLen = this.state.artist.length;
 
-    if (titleLen > 0 && tagsLen > 0 && contentLen > 0 && coverUrlLen > 0) {
+    if (titleLen > 0 && tagsLen > 0 && contentLen > 0 && coverUrlLen > 0 && artistLen > 0) {
       const imgUrl = this.state.coverUrl;
       if (imgUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) { // everything is valid
         this.setState({ errorMessage: '' });
         this.setState({ imageError: '' });
         const postInfo = {
           title: this.state.title,
-          tags: this.state.tags,
+          tags: this.state.tags.trim(),
           content: this.state.content,
           coverUrl: this.state.coverUrl,
+          artist: this.state.artist,
         };
         createPost(postInfo, this.props.history);
       } else { // invalid image url
@@ -70,6 +78,7 @@ class NewPost extends Component {
           <div className="error">{this.state.errorMessage}</div>
           <div className="input">
             <Input placeholder="Album Title" onChange={this.onTitleInput} value={this.state.title} />
+            <Input placeholder="Album Artist" onChange={this.onArtistInput} value={this.state.artist} />
             <div className="img-error">{this.state.imageError}</div>
             <Input placeholder="URL to Album Artwork" onChange={this.onCoverUrlInput} value={this.state.coverUrl} />
             <Input placeholder="Tags" onChange={this.onTagsInput} value={this.state.tags} />
