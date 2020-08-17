@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const ROOT_URL = 'https://sathvi-lab5-platform.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'https://sathvi-lab5-platform.herokuapp.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://platform.cs52.me/api';
 // const API_KEY = '?key=skorandla';
 
@@ -134,7 +134,7 @@ export function signupUser(user, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, user)
       .then((response) => {
-        dispatch({ type: ActionTypes.AUTH_USER });
+        dispatch({ type: ActionTypes.AUTH_USER, payload: user });
         localStorage.setItem('token', response.data.token);
         history.push('/');
       })
