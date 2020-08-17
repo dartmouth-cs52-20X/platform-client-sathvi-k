@@ -6,6 +6,9 @@ import NewPost from './newpost';
 import Post from './post';
 import Posts from './posts';
 import Fallback from './fallback';
+import SignIn from './signin';
+import SignUp from './signup';
+import PrivateRoute from './privateRoute';
 
 const App = (props) => {
   return (
@@ -14,8 +17,10 @@ const App = (props) => {
         <Nav />
         <Switch>
           <Route exact path="/" component={Posts} />
-          <Route path="/posts/new" component={NewPost} />
+          <PrivateRoute path="/posts/new" component={NewPost} />
           <Route path="/posts/:postID" component={Post} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signin" component={SignIn} />
           <Route component={Fallback} />
         </Switch>
       </div>

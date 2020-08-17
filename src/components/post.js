@@ -82,7 +82,7 @@ class Post extends Component {
       if (imgUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) { // everything is valid
         this.setState({ errorMessage: '' });
         this.setState({ imageError: '' });
-        console.log(this.state.tags.join(' '));
+
         const postInfo = {
           title: this.state.title,
           tags: this.state.tags.join(' ').trim(),
@@ -90,7 +90,7 @@ class Post extends Component {
           coverUrl: this.state.coverUrl,
           artist: this.state.artist,
         };
-        this.props.updatePost(this.props.match.params.postID, postInfo);
+        this.props.updatePost(this.props.match.params.postID, postInfo, this.props.history);
         this.setState({
           title: '',
           tags: '',
@@ -111,6 +111,35 @@ class Post extends Component {
   // https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page
   goToHomePage = () => {
     this.props.history.push('/');
+  }
+
+  // eslint-disable-next-line consistent-return
+  showButtons() {
+    if (this.props.user) {
+      if (this.props.user.email === this.props.currentPost.author.email) {
+        // console.log('i have editing and deleting persmission');
+        return (
+          <div className="buttons">
+            <button onClick={this.goToHomePage} type="button"> <i className="fa fa-arrow-left" /> </button>
+            <button onClick={this.editPost} type="button"> <i className="fas fa-pen" /> </button>
+            <button onClick={this.deletePost} type="button"> <i className="fas fa-trash-alt" /> </button>
+          </div>
+        );
+      } else {
+        return (
+          <div className="buttons">
+            <button onClick={this.goToHomePage} type="button"> <i className="fa fa-arrow-left" /> </button>
+          </div>
+        );
+      }
+    } else {
+      // console.log('i didnt make this post so i cant edit or delete it!!');
+      return (
+        <div className="buttons">
+          <button onClick={this.goToHomePage} type="button"> <i className="fa fa-arrow-left" /> </button>
+        </div>
+      );
+    }
   }
 
   render() {
@@ -142,10 +171,13 @@ class Post extends Component {
         </div>
       );
     } else {
+      // console.log(this.props.currentPost.author);
+      // console.log(this.props.user);
       return (
         <div className="detail-container">
           <div className="detail">
             <div className="left">
+              <div className="author">Recommended By: {this.props.currentPost.author.fullname} (@{this.props.currentPost.author.username})</div>
               <img id="cover" src={this.props.currentPost.coverUrl} alt="cover-url" />
               <div className="alltags"><TagLabel tags={this.props.currentPost.tags} /></div>
             </div>
@@ -155,11 +187,7 @@ class Post extends Component {
               {/* learned how to sanitize here https://stackoverflow.com/questions/29044518/safe-alternative-to-dangerouslysetinnerhtml */}
               {/* eslint-disable-next-line react/no-danger */}
               <div dangerouslySetInnerHTML={{ __html: marked(sanitize(this.props.currentPost.content || '')) }} />
-              <div className="buttons">
-                <button onClick={this.goToHomePage} type="button"> <i className="fa fa-arrow-left" /> </button>
-                <button onClick={this.editPost} type="button"> <i className="fas fa-pen" /> </button>
-                <button onClick={this.deletePost} type="button"> <i className="fas fa-trash-alt" /> </button>
-              </div>
+              {this.showButtons()}
             </div>
           </div>
         </div>
@@ -171,6 +199,7 @@ class Post extends Component {
 function mapStateToProps(reduxState) {
   return {
     currentPost: reduxState.posts.current,
+    user: reduxState.auth.user,
   };
 }
 

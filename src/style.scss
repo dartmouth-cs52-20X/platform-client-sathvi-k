@@ -73,6 +73,19 @@ li a:hover {
   }
   .header-nav ul li {
     padding: 0 0 0 40px;
+    .signout {
+      background-color: rgba(0, 0, 0, 0);
+      color: $white;
+      border: none;
+      outline: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      text-align: center;
+      padding: 0;
+    }
+    .signout:hover{
+      color: $brightblue
+    }
   }
   a {
     text-decoration: none;
@@ -247,13 +260,10 @@ li a:hover {
       height: 300px;
     }
     .left{
-      .tags {
-        background-color: rgba(43, 160, 255, 0.4);
-        border-radius: 50px;
-        width: auto;
-        align-items: center;
+      .author{
+        margin-bottom: 15px;
+        font-size: 16px;
         color: $black;
-        margin-top: 20px;
       }
     }
     .right {
@@ -345,7 +355,7 @@ li a:hover {
 
 .tag {
   background-color: $paleblue;
-  margin: 2px 4px;
+  margin: 5px 4px;
   border-radius: 15px;
   padding: 0 6px 2px 6px;
   text-align: center;
@@ -357,5 +367,5 @@ li a:hover {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin: 4px 0 2px 0;
+  margin: 4px 0 0 0;
 }
