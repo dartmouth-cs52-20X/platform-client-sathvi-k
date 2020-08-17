@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const ROOT_URL = 'https://sathvi-lab5-platform.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://sathvi-lab5-platform.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://platform.cs52.me/api';
 // const API_KEY = '?key=skorandla';
 
