@@ -3,6 +3,12 @@
 
 [deployed surge url (different from lab 4 and 5)](http://sathvi-cs52-sa8.surge.sh/)
 
+## What Worked Well
+Most of the instructions for setting up the main authentication was pretty straightforward, but I definitely had some mistakes that I had to debug. I also had some trouble figuring out how to access the logged-in user's information for the user permissions extra credit, but then I realized I could use redux state and it seemed to work!
+
+## What Didn't
+I hoped to finish implementing error handling for extra credit, but didn't get around to it because of time constraints.
+
 ## Extra Credit
 I extended the permissions system so that users can only edit or delete their own posts after they sign in. To test this out, here are two accounts that I made a post with:
 
