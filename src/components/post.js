@@ -5,6 +5,7 @@ import { sanitize } from 'dompurify';
 import marked from 'marked';
 import { fetchPost, deletePost, updatePost } from '../actions/index';
 import TagLabel from './taglabels';
+import { uploadImage } from '../s3';
 
 class Post extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Post extends Component {
     this.updatePost = this.updatePost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.goToHomePage = this.goToHomePage.bind(this);
+    this.onImageUpload = this.onImageUpload.bind(this);
   }
 
   componentDidMount() {
@@ -70,7 +72,47 @@ class Post extends Component {
     this.props.deletePost(this.props.match.params.postID, this.props.history);
   }
 
+  onImageUpload = (event) => {
+    const file = event.target.files[0];
+    // Handle null file
+    // Get url of the file and set it to the src of preview
+    if (file) {
+      this.setState({ preview: window.URL.createObjectURL(file), file });
+    }
+  }
+
   updatePost = () => {
+    if (this.state.file) {
+      uploadImage(this.state.file).then((url) => {
+        // use url for content_url and
+        // either run your createPost actionCreator
+        // or your updatePost actionCreator
+        this.setState({ coverUrl: url });
+        const postInfo = {
+          title: this.state.title,
+          tags: this.state.tags.join(' ').trim(),
+          content: this.state.content,
+          coverUrl: this.state.coverUrl,
+          artist: this.state.artist,
+        };
+        this.props.updatePost(this.props.match.params.postID, postInfo, this.props.history);
+        this.setState({
+          title: '',
+          tags: '',
+          content: '',
+          coverUrl: '',
+          artist: '',
+          editing: false,
+        });
+        this.props.fetchPost(this.props.match.params.postID);
+      }).catch((error) => {
+        // handle error
+        console.log(error);
+      });
+    }
+  }
+
+  /* updatePost = () => {
     const titleLen = this.state.title.length;
     const tagsLen = this.state.tags.length;
     const contentLen = this.state.content.length;
@@ -106,7 +148,7 @@ class Post extends Component {
     } else { // 1 or more empty fields
       this.setState({ errorMessage: 'Please fill out all fields!' });
     }
-  }
+  } */
 
   // https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page
   goToHomePage = () => {
@@ -157,8 +199,11 @@ class Post extends Component {
               <div className="justified-left">Album Artist</div>
               <Input placeholder="Album Artist" onChange={this.onArtistInput} value={this.state.artist} />
               <div className="img-error">{this.state.imageError}</div>
-              <div className="justified-left">Album Artwork</div>
-              <Input placeholder="URL to Album Artwork" onChange={this.onCoverUrlInput} value={this.state.coverUrl} />
+              {/* <div className="justified-left">Album Artwork</div>
+              <Input placeholder="URL to Album Artwork" onChange={this.onCoverUrlInput} value={this.state.coverUrl} /> */}
+              <img id="preview" alt="preview" src={this.state.preview} />
+              <br />
+              <input type="file" name="coverImage" onChange={this.onImageUpload} />
               <div className="justified-left">Tags</div>
               <Input placeholder="Tags" onChange={this.onTagsInput} value={this.state.tags.join(' ')} />
               <div className="justified-left">Your thoughts</div>
